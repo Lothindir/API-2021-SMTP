@@ -13,4 +13,4 @@ RUN mvn clean install
 EXPOSE 25/tcp
 EXPOSE 8282/tcp
 
-CMD java -jar target/MockMock-1.4.0.jar
+CMD java -jar target/MockMock-1.4.0.one-jar.jar
