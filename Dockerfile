@@ -10,7 +10,7 @@ RUN git checkout 69698c1b9241e27e8f52ea3e3624c31cb5ebbbba
 
 RUN mvn clean package
 
-FROM alpine:latest as app
+FROM alpine:latest AS app
 
 RUN apk update && apk add --no-cache openjdk11-jre-headless
 
