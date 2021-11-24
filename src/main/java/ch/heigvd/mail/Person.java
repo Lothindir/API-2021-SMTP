@@ -1,4 +1,4 @@
-package ch.heig.mail;
+package ch.heigvd.mail;
 
 public class Person {
     private final String _emailAddress;

@@ -1,6 +1,6 @@
-package ch.heig.mail;
+package ch.heigvd.mail;
 
-import ch.heig.prank.Prank;
+import ch.heigvd.prank.Prank;
 
 public class Mail {
     private final Person sender;

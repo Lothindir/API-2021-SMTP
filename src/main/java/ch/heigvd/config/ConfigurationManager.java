@@ -1,6 +1,6 @@
-package ch.heig.config;
+package ch.heigvd.config;
 
-import ch.heig.mail.Person;
+import ch.heigvd.mail.Person;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -14,13 +14,13 @@ public class ConfigurationManager {
     private int smtpServerPort;
     private ArrayList<Person> victims;
     private ArrayList<String> messages;
-    private int numberOfGroups;
+    private int nbOfGroups;
     private ArrayList<Person> personToCC;
 
     public ConfigurationManager() {
-        victims = getVictimsFromFile("/home/jdoe/kDrive/SCHOOL/HEIG/BA3/POO/LABS/API-SMTP/src/main/java/ch/heig/config/victims.utf8");
-        messages = getMessagesFromFile("/home/jdoe/kDrive/SCHOOL/HEIG/BA3/POO/LABS/API-SMTP/src/main/java/ch/heig/config/messages.utf8");
-        loadProperties("/home/jdoe/kDrive/SCHOOL/HEIG/BA3/POO/LABS/API-SMTP/src/main/java/ch/heig/config/config.properties");
+        victims = getVictimsFromFile("./victims.utf8");
+        messages = getMessagesFromFile("./messages.utf8");
+        loadProperties("./config.properties");
     }
 
 
@@ -52,7 +52,7 @@ public class ConfigurationManager {
 
             this.smtpServerAddress = properties.getProperty("smtpServerAddress");
             this.smtpServerPort = Integer.parseInt(properties.getProperty("smtpServerPort"));
-            this.numberOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
+            this.nbOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
             this.personToCC = new ArrayList<>();
             String str = properties.getProperty("personToCC");
             String[] tab = str.split(",");

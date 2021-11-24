@@ -1,10 +1,9 @@
-package ch.heig.smtp;
+package ch.heigvd.smtp;
 
-import ch.heig.mail.Mail;
+import ch.heigvd.mail.Mail;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;

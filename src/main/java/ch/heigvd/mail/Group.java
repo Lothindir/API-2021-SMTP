@@ -1,20 +1,20 @@
-package ch.heig.mail;
+package ch.heigvd.mail;
 
 import java.util.ArrayList;
 
 public class Group {
-    ArrayList<Person> listPeople = new ArrayList<>();
+    ArrayList<Person> people = new ArrayList<>();
 
     /**
      *
      * @param person
      */
     public void addPerson(Person person) {
-        listPeople.add(person);
+        people.add(person);
     }
 
     public ArrayList<Person> getPeople(){
-        return listPeople;
+        return new ArrayList<>(people);
     }
 
 }
