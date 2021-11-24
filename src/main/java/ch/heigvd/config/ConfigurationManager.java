@@ -18,9 +18,9 @@ public class ConfigurationManager {
     private ArrayList<Person> personToCC;
 
     public ConfigurationManager() {
-        victims = getVictimsFromFile("./victims.utf8");
-        messages = getMessagesFromFile("./messages.utf8");
-        loadProperties("./config.properties");
+        victims = getVictimsFromFile("victims.utf8");
+        messages = getMessagesFromFile("messages.utf8");
+        loadProperties("config.properties");
     }
 
 
