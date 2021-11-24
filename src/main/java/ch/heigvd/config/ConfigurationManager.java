@@ -1,11 +1,15 @@
 package ch.heigvd.config;
 
 import ch.heigvd.mail.Person;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 
+@Getter @Setter
 public class ConfigurationManager {
     /**
      * Attributs
@@ -23,21 +27,14 @@ public class ConfigurationManager {
         loadProperties("config.properties");
     }
 
-
-
     public ArrayList<Person> getVictims() {
-        return victims;
+        return new ArrayList<>(victims);
     }
-
     public ArrayList<String> getMessages() {
-        return messages;
+        return new ArrayList<>(messages);
     }
-
-    public String getHost() {
-        return smtpServerAddress;
-    }
-    public int getPort() {
-        return smtpServerPort;
+    public ArrayList<Person> getPersonToCC() {
+        return new ArrayList<>(personToCC);
     }
 
     /**
@@ -111,7 +108,7 @@ public class ConfigurationManager {
                     sb.setLength(0);
                     continue;
                 }
-                sb.append(line).append("\n");
+                sb.append(line).append("\n"); // maybe \r\n
             }
         } catch (IOException e) {
             e.printStackTrace();
