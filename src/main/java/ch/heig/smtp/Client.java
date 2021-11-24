@@ -1,4 +1,4 @@
-package ch.heigvd.api.smtp;
+package ch.heig.smtp;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
