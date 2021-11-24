@@ -14,7 +14,7 @@ public class SpamiBot {
         PrankManager pman = new PrankManager(confman);
         List<Prank> pranks = pman.generatePranks();
 
-        SmtpClient smtpClient = new SmtpClient(confman.getHost(), confman.getPort());
+        SmtpClient smtpClient = new SmtpClient(confman.getSmtpServerAddress(), confman.getSmtpServerPort());
         for (Prank p: pranks) {
             smtpClient.sendMail(p.getMail());
         }
