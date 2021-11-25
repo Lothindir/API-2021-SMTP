@@ -30,7 +30,7 @@
                             <outputDirectory>${basedir}/target/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/resources</directory>
+                                    <directory>resources</directory>
                                     <includes>
                                         <include>config.properties</include>
                                         <include>messages.utf8</include>

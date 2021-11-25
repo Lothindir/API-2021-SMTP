@@ -8,9 +8,14 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-@Getter @Setter
+@Getter
+@Setter
 public class ConfigurationManager {
+    private final static Logger LOG = Logger.getLogger(ConfigurationManager.class.getName());
+
     /**
      * Attributs
      */
@@ -22,17 +27,30 @@ public class ConfigurationManager {
     private ArrayList<Person> personToCC;
 
     public ConfigurationManager() {
-        victims = getVictimsFromFile("victims.utf8");
-        messages = getMessagesFromFile("messages.utf8");
-        loadProperties("config.properties");
+        this("");
+    }
+
+    public ConfigurationManager(String path) {
+        if (!path.isEmpty() && !(path.endsWith("/") || path.endsWith("\\"))) {
+            if (System.getProperty("os.name").toLowerCase().contains("win"))
+                path += "\\";
+            else
+                path += "/";
+        }
+
+        victims = getVictimsFromFile(path + "victims.utf8");
+        messages = getMessagesFromFile(path + "messages.utf8");
+        loadProperties(path + "config.properties");
     }
 
     public ArrayList<Person> getVictims() {
         return new ArrayList<>(victims);
     }
+
     public ArrayList<String> getMessages() {
         return new ArrayList<>(messages);
     }
+
     public ArrayList<Person> getPersonToCC() {
         return new ArrayList<>(personToCC);
     }
@@ -53,17 +71,15 @@ public class ConfigurationManager {
             this.personToCC = new ArrayList<>();
             String str = properties.getProperty("personToCC");
             String[] tab = str.split(",");
-            for(String s : tab) {
+            for (String s : tab) {
                 this.personToCC.add(new Person(s));
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
         }
 
-
     }
-
 
     /**
      *
@@ -72,10 +88,8 @@ public class ConfigurationManager {
      */
     public ArrayList<Person> getVictimsFromFile(String path) {
         ArrayList<Person> list = new ArrayList<>();
-        try {
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8);
-            BufferedReader r = new BufferedReader(isr);
-
+        try (BufferedReader r = new BufferedReader(
+                new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
             String line;
 
             while ((line = r.readLine()) != null) {
@@ -83,7 +97,7 @@ public class ConfigurationManager {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
         }
 
         return list;
@@ -96,22 +110,21 @@ public class ConfigurationManager {
      */
     public ArrayList<String> getMessagesFromFile(String path) {
         ArrayList<String> list = new ArrayList<>();
-        try {
-            InputStreamReader isr = new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8);
-            BufferedReader r = new BufferedReader(isr);
+        try (BufferedReader r = new BufferedReader(
+                new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 
             String line;
             StringBuilder sb = new StringBuilder();
-            while((line = r.readLine()) != null) {
-                if(line.equals("----------------")) {
+            while ((line = r.readLine()) != null) {
+                if (line.equals("----------------")) {
                     list.add(sb.toString());
                     sb.setLength(0);
                     continue;
                 }
-                sb.append(line).append("\n"); // maybe \r\n
+                sb.append(line).append("\r\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
         }
 
         return list;

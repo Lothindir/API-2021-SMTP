@@ -10,12 +10,17 @@ import java.util.List;
 public class SpamiBot {
 
     public static void main(String... args) {
-        ConfigurationManager confman = new ConfigurationManager();
+        ConfigurationManager confman;
+        if (args.length == 1)
+            confman = new ConfigurationManager(args[0]);
+        else
+            confman = new ConfigurationManager();
+
         PrankManager pman = new PrankManager(confman);
         List<Prank> pranks = pman.generatePranks();
 
         SmtpClient smtpClient = new SmtpClient(confman.getSmtpServerAddress(), confman.getSmtpServerPort());
-        for (Prank p: pranks) {
+        for (Prank p : pranks) {
             smtpClient.sendMail(p.getMail());
         }
     }
