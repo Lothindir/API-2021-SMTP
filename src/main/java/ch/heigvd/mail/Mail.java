@@ -1,7 +1,3 @@
-/**
- * Authors  : Anthony Coke, Francesco Monti
- * Date     : 2021-11-28
- */
 package ch.heigvd.mail;
 
 import lombok.Getter;
@@ -9,10 +5,13 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter @Setter
 /**
+ * Implementation of a Mail. It will run the prank campaign.
  *
+ * @author Anthony Coke
+ * @author Francesco Monti
  */
+@Getter @Setter
 public class Mail {
     private String _from;
     private List<String> _to;
@@ -21,15 +20,15 @@ public class Mail {
     private String _body;
 
     /**
-     *
-     * @param message
+     * Constructor with parameters, it calls the parseMessage.
+     * @param message the message with its subject and body.
      */
     public Mail(String message) {
         parseMessage(message);
     }
 
     /**
-     *
+     * Retrieves the subject and the body of the message to be sent.
      * @param message
      */
     private void parseMessage(String message) {

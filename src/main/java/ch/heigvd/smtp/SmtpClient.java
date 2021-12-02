@@ -1,7 +1,3 @@
-/**
- * Authors  : Anthony Coke, Francesco Monti
- * Date     : 2021-11-28
- */
 package ch.heigvd.smtp;
 
 import ch.heigvd.mail.Mail;
@@ -12,7 +8,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * SMTP Client implementation
+ * Implementation of the SMTP client. Its goal is to communicate with an SMTP server and send the pranks generated to
+ * each victim.
+ *
+ * @author Anthony Coke
+ * @author Francesco Monti
  */
 public class SmtpClient {
 
@@ -39,11 +39,12 @@ public class SmtpClient {
      */
     public void sendMail(Mail mail) {
 
+        // try with ressource
         try (Socket clientSocket = new Socket(smtpServerAddress, smtpServerPort);
              BufferedReader br = new BufferedReader(
                      new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
              BufferedWriter bw = new BufferedWriter(
-                     new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.UTF_8));){
+                     new OutputStreamWriter(clientSocket.getOutputStream(), StandardCharsets.UTF_8))){
 
             String OK_CODE = "250 ";
 
@@ -52,6 +53,7 @@ public class SmtpClient {
             String line = br.readLine();
             LOG.log(Level.INFO, line);
 
+            // EHLO
             bw.write("EHLO SpamiBot" + lineReturn);
             bw.flush();
             line = br.readLine();
@@ -68,6 +70,7 @@ public class SmtpClient {
                 LOG.log(Level.INFO, "WHILE " + line);
             }
 
+            //  define sender
             bw.write("MAIL FROM: " + mail.get_from() + lineReturn);
             bw.flush();
             line = br.readLine();
@@ -77,6 +80,7 @@ public class SmtpClient {
                 throw new IOException("Error occurred" + line);
             }
 
+            // define recipients
             for(String receptTo : mail.get_to()) {
                 bw.write("RCPT TO: " + receptTo + lineReturn);
                 bw.flush();
@@ -87,6 +91,7 @@ public class SmtpClient {
                 }
             }
 
+            // define recipients in carbon copy
             for(String receptCC : mail.get_cc()) {
                 bw.write("RCPT TO: " + receptCC + lineReturn);
                 bw.flush();
@@ -97,17 +102,15 @@ public class SmtpClient {
                 }
             }
 
+            // write message with encoding
             bw.write("DATA\r\n");
             bw.flush();
             br.readLine();
 
-
-            //
-
             bw.write(encoding);
             bw.write("From: " + mail.get_from() + lineReturn);
 
-
+            // list recipients
             bw.write("To: ");
             int mailGetToSize = mail.get_to().size();
             for(int i = 0; i < mailGetToSize; ++i) {
@@ -119,6 +122,7 @@ public class SmtpClient {
             }
             bw.write(lineReturn);
 
+            // list carbon copy people
             bw.write("Cc: ");
             int mailGetCcSize = mail.get_cc().size();
             for(int i = 0; i < mailGetCcSize; ++i) {
@@ -131,6 +135,7 @@ public class SmtpClient {
             bw.write(lineReturn);
             bw.flush();
 
+            // add subject and body, confirm e-mail
             bw.write(mail.get_subject() + lineReturn + lineReturn);
             bw.write(mail.get_body());
             bw.write(lineReturn);
@@ -144,6 +149,7 @@ public class SmtpClient {
                 throw new IOException("Error occurred" + line);
             }
 
+            // quit
             bw.write("QUIT" + lineReturn);
             bw.flush();
 

@@ -1,7 +1,3 @@
-/**
- * Authors  : Anthony Coke, Francesco Monti
- * Date     : 2021-11-28
- */
 package ch.heigvd;
 
 import ch.heigvd.config.ConfigurationManager;
@@ -11,7 +7,10 @@ import ch.heigvd.smtp.SmtpClient;
 import java.util.List;
 
 /**
- * Implementation of a spam bot in Java
+ * Implementation of a SpamiBot. It will run the prank campaign.
+ *
+ * @author Anthony Coke
+ * @author Francesco Monti
  */
 public class SpamiBot {
 

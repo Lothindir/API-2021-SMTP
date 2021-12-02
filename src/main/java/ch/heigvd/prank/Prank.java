@@ -1,7 +1,3 @@
-/**
- * Authors  : Anthony Coke, Francesco Monti
- * Date     : 2021-11-28
- */
 package ch.heigvd.prank;
 
 import ch.heigvd.mail.Group;
@@ -14,10 +10,13 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
-@Getter @Setter @AllArgsConstructor
 /**
+ * Implementation of a prank.
  *
+ * @author Anthony Coke
+ * @author Francesco Monti
  */
+@Getter @Setter @AllArgsConstructor
 public class Prank {
     @NonNull private Person chosenSender;
     @NonNull private ArrayList<Person> chosenVictims;
@@ -26,16 +25,16 @@ public class Prank {
     @NonNull private final Group group;
 
     /**
-     *
-     * @return
+     * Retrieves the list of the victims of the prank.
+     * @return a copy of the list of Person.
      */
     public ArrayList<Person> getChosenVictims() {
         return new ArrayList<>(chosenVictims);
     }
 
     /**
-     *
-     * @return
+     * Retrieves the list of the people to add as carbon copy.
+     * @return a copy of the list of Person.
      */
     public ArrayList<Person> getChosenCC() {
         return new ArrayList<>(chosenCC);

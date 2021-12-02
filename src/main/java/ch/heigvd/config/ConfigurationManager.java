@@ -4,6 +4,7 @@ import ch.heigvd.mail.Person;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.naming.ConfigurationException;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -11,8 +12,13 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Getter
-@Setter
+/**
+ * Implementation of the configuration manager. Its main goal is to load retrieve the data from all the files.
+ *
+ * @author Anthony Coke
+ * @author Francesco Monti
+ */
+@Getter @Setter
 public class ConfigurationManager {
     private final static Logger LOG = Logger.getLogger(ConfigurationManager.class.getName());
 
@@ -26,10 +32,17 @@ public class ConfigurationManager {
     private ArrayList<String> messages;
     private ArrayList<Person> personToCC;
 
+    /**
+     * Default constructor.
+     */
     public ConfigurationManager() {
         this("");
     }
 
+    /**
+     * Constructor with parameters, it loads the config from all the files.
+     * @param path the path of the folder containing the config files.
+     */
     public ConfigurationManager(String path) {
         if (!path.isEmpty() && !(path.endsWith("/") || path.endsWith("\\"))) {
             if (System.getProperty("os.name").toLowerCase().contains("win"))
@@ -41,23 +54,42 @@ public class ConfigurationManager {
         victims = getVictimsFromFile(path + "victims.utf8");
         messages = getMessagesFromFile(path + "messages.utf8");
         loadProperties(path + "config.properties");
+
+        // if there is not enough victims per group, we redefine the nbOfGroups to assure there are 3 at least 3 people
+        // per group (requirement of the lab).
+        if(victims.size() / nbOfGroups < 3)
+        {
+            throw new RuntimeException("Not enough people per group ! You need at least 3 people in a group.");
+        }
     }
 
+    /**
+     * Get the list of the people to prank.
+     * @return a copy of the list to respect encapsulation.
+     */
     public ArrayList<Person> getVictims() {
         return new ArrayList<>(victims);
     }
 
+    /**
+     * Get the list of the messages that can be sent.
+     * @return a copy of the list of String to respect encapsulation.
+     */
     public ArrayList<String> getMessages() {
         return new ArrayList<>(messages);
     }
 
+    /**
+     * Get the list of the people to add as carbon copy.
+     * @return a copy of the list to respect encapsulation.
+     */
     public ArrayList<Person> getPersonToCC() {
         return new ArrayList<>(personToCC);
     }
 
     /**
-     *
-     * @param path
+     * Loads the properties from the config.properties file.
+     * @param path the path of the file.
      */
     public void loadProperties(String path) {
         try {
@@ -68,7 +100,11 @@ public class ConfigurationManager {
             this.smtpServerAddress = properties.getProperty("smtpServerAddress");
             this.smtpServerPort = Integer.parseInt(properties.getProperty("smtpServerPort"));
             this.nbOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
+            if(nbOfGroups <= 0)
+                throw new RuntimeException("nbOfGroups cannot be equal or smaller that zero !");
             this.personToCC = new ArrayList<>();
+
+            // Retrieve each e-mail address seperated by a comma.
             String str = properties.getProperty("personToCC");
             String[] tab = str.split(",");
             for (String s : tab) {
@@ -82,9 +118,9 @@ public class ConfigurationManager {
     }
 
     /**
-     *
-     * @param path
-     * @return
+     * Retrieves the victims from a file.
+     * @param path the path of the file.
+     * @return an ArrayList of Person.
      */
     public ArrayList<Person> getVictimsFromFile(String path) {
         ArrayList<Person> list = new ArrayList<>();
@@ -104,12 +140,14 @@ public class ConfigurationManager {
     }
 
     /**
-     *
-     * @param path
-     * @return
+     * Retrieves the defined messages from a file.
+     * @param path the path of the file containing the messages.
+     * @return an ArrayList of String.
      */
     public ArrayList<String> getMessagesFromFile(String path) {
         ArrayList<String> list = new ArrayList<>();
+
+        // try with ressource
         try (BufferedReader r = new BufferedReader(
                 new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
 
