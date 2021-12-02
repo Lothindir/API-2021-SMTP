@@ -2,6 +2,7 @@ package ch.heigvd.mail;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @author Anthony Coke
  * @author Francesco Monti
  */
+@Accessors(prefix = {"_"})
 @Getter @Setter
 public class Mail {
     private String _from;

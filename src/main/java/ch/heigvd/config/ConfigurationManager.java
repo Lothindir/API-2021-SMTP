@@ -4,7 +4,6 @@ import ch.heigvd.mail.Person;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.naming.ConfigurationException;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class ConfigurationManager {
     private int nbOfGroups;
     private ArrayList<Person> victims;
     private ArrayList<String> messages;
-    private ArrayList<Person> personToCC;
+    private ArrayList<Person> peopleToCC;
 
     /**
      * Default constructor.
@@ -83,8 +82,8 @@ public class ConfigurationManager {
      * Get the list of the people to add as carbon copy.
      * @return a copy of the list to respect encapsulation.
      */
-    public ArrayList<Person> getPersonToCC() {
-        return new ArrayList<>(personToCC);
+    public ArrayList<Person> getPeopleToCC() {
+        return new ArrayList<>(peopleToCC);
     }
 
     /**
@@ -102,13 +101,13 @@ public class ConfigurationManager {
             this.nbOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
             if(nbOfGroups <= 0)
                 throw new RuntimeException("nbOfGroups cannot be equal or smaller that zero !");
-            this.personToCC = new ArrayList<>();
+            this.peopleToCC = new ArrayList<>();
 
             // Retrieve each e-mail address seperated by a comma.
-            String str = properties.getProperty("personToCC");
+            String str = properties.getProperty("peopleToCC");
             String[] tab = str.split(",");
             for (String s : tab) {
-                this.personToCC.add(new Person(s));
+                this.peopleToCC.add(new Person(s));
             }
 
         } catch (IOException e) {

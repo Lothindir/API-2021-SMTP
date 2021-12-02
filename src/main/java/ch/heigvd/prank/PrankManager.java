@@ -6,10 +6,11 @@ import ch.heigvd.mail.Mail;
 import ch.heigvd.mail.Person;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
  * @author Anthony Coke
  * @author Francesco Monti
  */
+
 @Getter @Setter
 public class PrankManager {
 
@@ -44,18 +46,14 @@ public class PrankManager {
         ArrayList<Prank> pranks = new ArrayList<>();
 
         ArrayList<String> messages = confMan.getMessages();
-        ArrayList<Person> listPersonCC = confMan.getPersonToCC();
-
-
-
-
+        ArrayList<Person> listPersonCC = confMan.getPeopleToCC();
 
         ArrayList<Group> groups = generateGroups(confMan.getVictims(), nbOfGroups);
         int index = 0;
         for(Group g : groups){
 
             // get the victims
-            ArrayList<Person> victims = g.getPeople();
+            ArrayList<Person> victims = g.getMembers();
 
             // used to make sure the victims are randomly selected
             Collections.shuffle(victims);
@@ -66,7 +64,7 @@ public class PrankManager {
 
             // remove a victim and set it as sender
             Person sender = victims.remove(0);
-            mail.set_from(sender.get_emailAddress());
+            mail.setFrom(sender.get_emailAddress());
 
             ArrayList<String> listTo = new ArrayList<>();
 
@@ -74,7 +72,7 @@ public class PrankManager {
             for(Person p: victims) {
                 listTo.add(p.get_emailAddress());
             }
-            mail.set_to(listTo);
+            mail.setTo(listTo);
 
             ArrayList<String> listStringCC = new ArrayList<>();
 
@@ -82,10 +80,10 @@ public class PrankManager {
             for(Person p : listPersonCC) {
                 listStringCC.add(p.get_emailAddress());
             }
-            mail.set_cc(listStringCC);
+            mail.setCc(listStringCC);
 
             // generate the prank
-            Prank prank = new Prank(sender, victims, confMan.getPersonToCC(), mail, g);
+            Prank prank = new Prank(sender, victims, confMan.getPeopleToCC(), mail, g);
             pranks.add(prank);
         }
 
@@ -123,7 +121,7 @@ public class PrankManager {
             else
                 subList = newVictims.subList(startIndex, newVictims.size());
             startIndex += nbPerGroup;
-            groups.get(i).setPeople(subList);
+            groups.get(i).setMembers(subList);
         }
 
         return groups;

@@ -71,7 +71,7 @@ public class SmtpClient {
             }
 
             //  define sender
-            bw.write("MAIL FROM: " + mail.get_from() + lineReturn);
+            bw.write("MAIL FROM: " + mail.getFrom() + lineReturn);
             bw.flush();
             line = br.readLine();
             LOG.log(Level.INFO, "MAILFROM " + line);
@@ -81,7 +81,7 @@ public class SmtpClient {
             }
 
             // define recipients
-            for(String receptTo : mail.get_to()) {
+            for(String receptTo : mail.getTo()) {
                 bw.write("RCPT TO: " + receptTo + lineReturn);
                 bw.flush();
                 line = br.readLine();
@@ -92,7 +92,7 @@ public class SmtpClient {
             }
 
             // define recipients in carbon copy
-            for(String receptCC : mail.get_cc()) {
+            for(String receptCC : mail.setCc();) {
                 bw.write("RCPT TO: " + receptCC + lineReturn);
                 bw.flush();
                 line = br.readLine();
@@ -124,12 +124,12 @@ public class SmtpClient {
 
             // list carbon copy people
             bw.write("Cc: ");
-            int mailGetCcSize = mail.get_cc().size();
+            int mailGetCcSize = mail.setCc().size();
             for(int i = 0; i < mailGetCcSize; ++i) {
                 if(i == mailGetCcSize - 1){
-                    bw.write(mail.get_cc().get(i));
+                    bw.write(mail.setCc().get(i));
                 } else {
-                    bw.write(mail.get_cc().get(i) + ",");
+                    bw.write(mail.setCc().get(i) + ",");
                 }
             }
             bw.write(lineReturn);
