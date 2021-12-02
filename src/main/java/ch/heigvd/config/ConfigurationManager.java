@@ -21,9 +21,9 @@ public class ConfigurationManager {
      */
     private String smtpServerAddress;
     private int smtpServerPort;
+    private int nbOfGroups;
     private ArrayList<Person> victims;
     private ArrayList<String> messages;
-    private int nbOfGroups;
     private ArrayList<Person> personToCC;
 
     public ConfigurationManager() {

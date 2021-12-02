@@ -1,3 +1,7 @@
+/**
+ * Authors  : Anthony Coke, Francesco Monti
+ * Date     : 2021-11-28
+ */
 package ch.heigvd.prank;
 
 import ch.heigvd.mail.Group;
@@ -11,6 +15,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 @Getter @Setter @AllArgsConstructor
+/**
+ *
+ */
 public class Prank {
     @NonNull private Person chosenSender;
     @NonNull private ArrayList<Person> chosenVictims;

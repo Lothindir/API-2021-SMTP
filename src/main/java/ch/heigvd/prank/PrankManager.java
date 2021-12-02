@@ -1,3 +1,7 @@
+/**
+ * Authors  : Anthony Coke, Francesco Monti
+ * Date     : 2021-11-28
+ */
 package ch.heigvd.prank;
 
 import ch.heigvd.config.ConfigurationManager;
@@ -6,16 +10,16 @@ import ch.heigvd.mail.Mail;
 import ch.heigvd.mail.Person;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Getter
-@Setter
+@Getter @Setter
+/**
+ * PrankManager implementation
+ */
 public class PrankManager {
 
     private final static Logger LOG = Logger.getLogger(PrankManager.class.getName());
@@ -23,14 +27,20 @@ public class PrankManager {
     private int nbOfGroups;
     private int nbOfVictims;
 
-
+    /**
+     *
+     * @param configurationManager
+     */
     public PrankManager(ConfigurationManager configurationManager) {
         confMan = configurationManager;
         nbOfGroups = confMan.getNbOfGroups();
         nbOfVictims = confMan.getVictims().size();
     }
 
-
+    /**
+     * Generate an ArrayList of pranks
+     * @return a List<> of pranks (can contain only one)
+     */
     public ArrayList<Prank> generatePranks() {
         ArrayList<Prank> pranks = new ArrayList<>();
 
@@ -50,21 +60,21 @@ public class PrankManager {
             Mail mail = new Mail(messages.get(index));
             index = (++index) % messages.size(); // to loop on the message list
             Person sender = victims.remove(0);
-            mail.setFrom(sender.getEmailAddress());
+            mail.set_from(sender.get_emailAddress());
             ArrayList<String> listTo = new ArrayList<>();
 
             for(Person p: victims) {
-                listTo.add(p.getEmailAddress());
+                listTo.add(p.get_emailAddress());
             }
 
-            mail.setTo(listTo);
+            mail.set_to(listTo);
 
             ArrayList<String> listStringCC = new ArrayList<>();
             for(Person p : listPersonCC) {
-                listStringCC.add(p.getEmailAddress());
+                listStringCC.add(p.get_emailAddress());
             }
 
-            mail.setCc(listStringCC);
+            mail.set_cc(listStringCC);
             Prank prank = new Prank(sender, victims, confMan.getPersonToCC(), mail, g);
             pranks.add(prank);
         }
@@ -72,6 +82,12 @@ public class PrankManager {
         return pranks;
     }
 
+    /**
+     * Generates a list of Group
+     * @param victims the number of victims in the victims.utf8 file
+     * @param nbOfGroups the number of groups wished
+     * @return an ArrayList<> of groups
+     */
     private ArrayList<Group> generateGroups(ArrayList<Person> victims, int nbOfGroups) {
         ArrayList<Group> groups = new ArrayList<>();
         for(int i = 0; i < nbOfGroups; ++i) {

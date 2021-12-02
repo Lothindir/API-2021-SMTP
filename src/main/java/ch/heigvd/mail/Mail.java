@@ -1,34 +1,46 @@
+/**
+ * Authors  : Anthony Coke, Francesco Monti
+ * Date     : 2021-11-28
+ */
 package ch.heigvd.mail;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.List;
 
 @Getter @Setter
+/**
+ *
+ */
 public class Mail {
-    private String from;
-    private List<String> to;
-    private List<String> cc;
-    private String subject;
-    private String body;
+    private String _from;
+    private List<String> _to;
+    private List<String> _cc;
+    private String _subject;
+    private String _body;
 
+    /**
+     *
+     * @param message
+     */
     public Mail(String message) {
         parseMessage(message);
     }
 
+    /**
+     *
+     * @param message
+     */
     private void parseMessage(String message) {
         String[] strs = message.split("\n");
         if(strs[0].contains("Subject:")) {
-            subject = strs[0];
+            _subject = strs[0];
         }
         StringBuilder sb = new StringBuilder();
         for(int i = 1; i < strs.length; ++i) {
             sb.append(strs[i]).append("\n");
         }
-        body = sb.toString();
+        _body = sb.toString();
     }
 }
