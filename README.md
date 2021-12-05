@@ -1,21 +1,3 @@
----
-title: "API-2021 SMTP"
-author:
-- Coke Anthony
-- Monti Francesco
-
-date: "29.11.2021"
-titlepage: true
-logo: heig-logo.png
-toc: true
-toc-own-page: true
-header-right: '\headerlogo'
-header-includes: |
-  ```{=latex}
-  \newcommand{\headerlogo}{\raisebox{0pt}[0pt]{\includegraphics[width=1cm]{heig-logo.png}}}
-  ```
-...
-
 ## Introduction
 The main goal of this project is to become familiar with the SMTP protocol. We were asked by our professor to develop a client application that plays pranks on a list of victims. This app will generate a number of pranks based on properties specified in a config file, a list of messages and a list of victims. Then, the app will communicate with a SMTP server in order to send the prank e-mail to the targeted victims.
 
@@ -59,4 +41,44 @@ The last file contains the list of e-mail addresses. Be sure to have correctly f
 
 
 ## Implémentation
+
+## Class diagram
+
+![]()
+
+We decided to divide our project in four packages : config, mail, prank, 
+smtp. 
+
+### Config
+
+This package contains the different configuration files such as config.
+properties, messages.utf8 and victims.utf8. We decided to create a 
+ConfigurationManager class, its main goal is to fetch the configuration from 
+the files.
+
+### Mail
+In this package you will find a Group class representing a group of person 
+affected by the prank attack. 
+
+The Mail class stores all the information of the e-mail to send such as the 
+sender's address, the subject, the body, the victims' address and the people 
+to set as carbon copy. Every information is stored as a String.
+
+Obviously it's a class representing a person. It stores the e-mail address 
+fetched in the files.
+
+### Prank
+Here we put the Prank class. It contains all the information regarding the 
+prank attack (victims, group, mail, sender). 
+Its mail object will be 
+transferred to the smtp client and sent to the victims.
+
+Then there is the PrankManager, it simply generates groups from the list of 
+people and creates a custom prank for each one of them.
+
+
+## Smtp
+
+
+
 
