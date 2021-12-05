@@ -48,6 +48,9 @@ The last file contains the list of e-mail addresses. Be sure to have correctly f
 
 We decided to divide our project in four packages : config, mail, prank, 
 smtp. 
+The SpamiBot class is the entry point of the application. It creates an SMTP 
+client with some properties from a configuration manager. Generates a list 
+of pranks using the PrankManager and sends each custom Mail to the client.
 
 ### Config
 
@@ -78,6 +81,12 @@ people and creates a custom prank for each one of them.
 
 
 ## Smtp
+The SMTP Client only task is to communicate with the SMTP server and execute 
+the attack. It uses the SMTP protocol to send the information to the server 
+and listens for its response.
+
+
+
 
 
 
