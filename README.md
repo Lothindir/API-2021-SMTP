@@ -1,3 +1,20 @@
+# Table des matières
+- [Introduction](#introduction)
+- [MockMock server](#mockmock-server)
+  * [Usage](#usage)
+    + [Docker Desktop](#docker-desktop)
+  * [Build image locally](#build-image-locally)
+- [Set up](#set-up)
+  * [_config.properties_](#-configproperties-)
+  * [_messages.utf8_](#-messagesutf8-)
+  * [_victims.utf8_](#-victimsutf8-)
+- [Implementation](#implementation)
+  * [Class diagram](#class-diagram)
+    + [Config](#config)
+    + [Mail](#mail)
+    + [Prank](#prank)
+  * [Smtp](#smtp)
+
 # Introduction
 The main goal of this project was to become familiar with the SMTP protocol. We were asked by our professor to develop a client application that plays pranks on a list of victims. This app will generate a number of pranks based on properties specified in a config file, a list of messages and a list of victims. Then, the app will communicate with a SMTP server in order to send the prank e-mails to the targeted victims.
 
