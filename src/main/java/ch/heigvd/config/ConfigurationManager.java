@@ -43,6 +43,7 @@ public class ConfigurationManager {
      * @param path the path of the folder containing the config files.
      */
     public ConfigurationManager(String path) {
+        /** Thanks Windows ! */
         if (!path.isEmpty() && !(path.endsWith("/") || path.endsWith("\\"))) {
             if (System.getProperty("os.name").toLowerCase().contains("win"))
                 path += "\\";
