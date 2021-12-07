@@ -2,6 +2,7 @@ package ch.heigvd.mail;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * Implementation of a person. It just stores an e-mail address retrieved from the victims.utf8 file.
@@ -9,6 +10,7 @@ import lombok.Setter;
  * @author Anthony Coke
  * @author Francesco Monti
  */
+@Accessors(prefix = {"_"})
 @Getter @Setter
 public class Person {
     private final String _emailAddress;

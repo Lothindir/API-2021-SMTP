@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @author Anthony Coke
  * @author Francesco Monti
  */
-@Getter @Setter @AllArgsConstructor
+@AllArgsConstructor
 public class Prank {
     @NonNull private Person chosenSender;
     @NonNull private ArrayList<Person> chosenVictims;
@@ -24,20 +25,10 @@ public class Prank {
     @NonNull private final Mail mail;
     @NonNull private final Group group;
 
-    /**
-     * Retrieves the list of the victims of the prank.
-     * @return a copy of the list of Person.
-     */
-    public ArrayList<Person> getChosenVictims() {
-        return new ArrayList<>(chosenVictims);
-    }
+    // TODO : DELETE CES GETTERS ?
 
-    /**
-     * Retrieves the list of the people to add as carbon copy.
-     * @return a copy of the list of Person.
-     */
-    public ArrayList<Person> getChosenCC() {
-        return new ArrayList<>(chosenCC);
+    public Mail getMail() {
+        return mail;
     }
 }
 

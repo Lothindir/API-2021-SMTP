@@ -4,9 +4,6 @@ import ch.heigvd.config.ConfigurationManager;
 import ch.heigvd.mail.Group;
 import ch.heigvd.mail.Mail;
 import ch.heigvd.mail.Person;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,14 +16,15 @@ import java.util.logging.Logger;
  * @author Anthony Coke
  * @author Francesco Monti
  */
-
-@Getter @Setter
 public class PrankManager {
 
+    // REMOVE ?
     private final static Logger LOG = Logger.getLogger(PrankManager.class.getName());
     private final ConfigurationManager confMan;
-    private int nbOfGroups;
-    private int nbOfVictims;
+    // REDUNDANT ?
+    private final int nbOfGroups;
+    private final int nbOfVictims;
+
 
     /**
      * Constructor with parameters. It needs a configuration manager in order to load the config files.
@@ -46,7 +44,7 @@ public class PrankManager {
         ArrayList<Prank> pranks = new ArrayList<>();
 
         ArrayList<String> messages = confMan.getMessages();
-        ArrayList<Person> listPersonCC = confMan.getPeopleToCC();
+        ArrayList<Person> listPersonCC = confMan.getPeopleToCc();
 
         ArrayList<Group> groups = generateGroups(confMan.getVictims(), nbOfGroups);
         int index = 0;
@@ -64,13 +62,13 @@ public class PrankManager {
 
             // remove a victim and set it as sender
             Person sender = victims.remove(0);
-            mail.setFrom(sender.get_emailAddress());
+            mail.setFrom(sender.getEmailAddress());
 
             ArrayList<String> listTo = new ArrayList<>();
 
             // the remaining victims are added to the recipient list
             for(Person p: victims) {
-                listTo.add(p.get_emailAddress());
+                listTo.add(p.getEmailAddress());
             }
             mail.setTo(listTo);
 
@@ -78,12 +76,12 @@ public class PrankManager {
 
             // set the list of carbon copy people
             for(Person p : listPersonCC) {
-                listStringCC.add(p.get_emailAddress());
+                listStringCC.add(p.getEmailAddress());
             }
             mail.setCc(listStringCC);
 
             // generate the prank
-            Prank prank = new Prank(sender, victims, confMan.getPeopleToCC(), mail, g);
+            Prank prank = new Prank(sender, victims, confMan.getPeopleToCc(), mail, g);
             pranks.add(prank);
         }
 

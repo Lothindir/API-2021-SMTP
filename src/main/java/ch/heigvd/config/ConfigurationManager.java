@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @author Anthony Coke
  * @author Francesco Monti
  */
-@Getter @Setter
+@Getter
 public class ConfigurationManager {
     private final static Logger LOG = Logger.getLogger(ConfigurationManager.class.getName());
 
@@ -29,7 +29,7 @@ public class ConfigurationManager {
     private int nbOfGroups;
     private ArrayList<Person> victims;
     private ArrayList<String> messages;
-    private ArrayList<Person> peopleToCC;
+    private ArrayList<Person> peopleToCc;
 
     /**
      * Default constructor.
@@ -82,8 +82,8 @@ public class ConfigurationManager {
      * Get the list of the people to add as carbon copy.
      * @return a copy of the list to respect encapsulation.
      */
-    public ArrayList<Person> getPeopleToCC() {
-        return new ArrayList<>(peopleToCC);
+    public ArrayList<Person> getPeopleToCc() {
+        return new ArrayList<>(peopleToCc);
     }
 
     /**
@@ -101,13 +101,13 @@ public class ConfigurationManager {
             this.nbOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
             if(nbOfGroups <= 0)
                 throw new RuntimeException("nbOfGroups cannot be equal or smaller that zero !");
-            this.peopleToCC = new ArrayList<>();
+            this.peopleToCc = new ArrayList<>();
 
             // Retrieve each e-mail address seperated by a comma.
             String str = properties.getProperty("peopleToCC");
             String[] tab = str.split(",");
             for (String s : tab) {
-                this.peopleToCC.add(new Person(s));
+                this.peopleToCc.add(new Person(s));
             }
 
         } catch (IOException e) {

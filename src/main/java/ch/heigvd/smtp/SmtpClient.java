@@ -29,8 +29,7 @@ public class SmtpClient {
      */
     public SmtpClient(String smtpServerAddress, int smtpServerPort){
         this.smtpServerAddress = smtpServerAddress;
-         this.smtpServerPort = smtpServerPort;
-
+        this.smtpServerPort = smtpServerPort;
     }
 
     /**
@@ -92,7 +91,7 @@ public class SmtpClient {
             }
 
             // define recipients in carbon copy
-            for(String receptCC : mail.setCc();) {
+            for(String receptCC : mail.getCc()) {
                 bw.write("RCPT TO: " + receptCC + lineReturn);
                 bw.flush();
                 line = br.readLine();
@@ -108,36 +107,36 @@ public class SmtpClient {
             br.readLine();
 
             bw.write(encoding);
-            bw.write("From: " + mail.get_from() + lineReturn);
+            bw.write("From: " + mail.getFrom() + lineReturn);
 
             // list recipients
             bw.write("To: ");
-            int mailGetToSize = mail.get_to().size();
+            int mailGetToSize = mail.getTo().size();
             for(int i = 0; i < mailGetToSize; ++i) {
                 if(i == mailGetToSize - 1){
-                    bw.write(mail.get_to().get(i));
+                    bw.write(mail.getTo().get(i));
                 } else {
-                    bw.write(mail.get_to().get(i) + ",");
+                    bw.write(mail.getTo().get(i) + ",");
                 }
             }
             bw.write(lineReturn);
 
             // list carbon copy people
             bw.write("Cc: ");
-            int mailGetCcSize = mail.setCc().size();
+            int mailGetCcSize = mail.getCc().size();
             for(int i = 0; i < mailGetCcSize; ++i) {
                 if(i == mailGetCcSize - 1){
-                    bw.write(mail.setCc().get(i));
+                    bw.write(mail.getCc().get(i));
                 } else {
-                    bw.write(mail.setCc().get(i) + ",");
+                    bw.write(mail.getCc().get(i) + ",");
                 }
             }
             bw.write(lineReturn);
             bw.flush();
 
             // add subject and body, confirm e-mail
-            bw.write(mail.get_subject() + lineReturn + lineReturn);
-            bw.write(mail.get_body());
+            bw.write(mail.getSubject() + lineReturn + lineReturn);
+            bw.write(mail.getBody());
             bw.write(lineReturn);
             bw.write(".");
             bw.write(lineReturn);
