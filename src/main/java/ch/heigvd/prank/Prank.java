@@ -24,7 +24,6 @@ public class Prank {
    private Group chosenVictims;
    private Group chosenCC;
 
-
    public Prank(Person sender, Group victims, Group cc, String message) {
       this.chosenSender = new Person(sender);
       this.chosenVictims = new Group(victims);

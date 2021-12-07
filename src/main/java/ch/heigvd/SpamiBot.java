@@ -39,7 +39,8 @@ public class SpamiBot {
       List<Prank> pranks = pman.generatePranks();
 
       // Sends the e-mail(s) to the SMTP server with a SMTP client
-      try (SmtpClient smtpClient = new SmtpClient(confman.getSmtpServerAddress(), confman.getSmtpServerPort(), confman.getSmtpUser(), confman.getSmtpPassword())) {
+      try (SmtpClient smtpClient = new SmtpClient(confman.getSmtpServerAddress(), confman.getSmtpServerPort(),
+            confman.getSmtpUser(), confman.getSmtpPassword())) {
          for (Prank p : pranks) {
             smtpClient.sendMail(p.getMail());
          }

@@ -19,7 +19,7 @@ public class Person {
 
    /**
     * Copy constructor
-
+    * 
     * @param other other person to copy from
     */
    public Person(Person other) {
