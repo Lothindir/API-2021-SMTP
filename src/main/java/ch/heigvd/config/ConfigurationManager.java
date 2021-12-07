@@ -27,6 +27,8 @@ public class ConfigurationManager {
      */
     private String smtpServerAddress;
     private int smtpServerPort;
+    private String smtpUser;
+    private String smtpPassword;
     private int nbOfGroups;
     private ArrayList<String> messages;
     private Group victims;
@@ -111,6 +113,9 @@ public class ConfigurationManager {
             for (String s : tab) {
                this.peopleToCc.add(new Person(s));
             }
+            
+            this.smtpUser = properties.getProperty("smtpUser", "");
+            this.smtpPassword = properties.getProperty("smtpPassword", "");
 
         } catch (IOException e) {
             LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
