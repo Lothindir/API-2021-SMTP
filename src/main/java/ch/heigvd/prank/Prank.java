@@ -3,13 +3,8 @@ package ch.heigvd.prank;
 import ch.heigvd.mail.Group;
 import ch.heigvd.mail.Mail;
 import ch.heigvd.mail.Person;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import java.util.ArrayList;
 
 /**
  * Implementation of a prank.
@@ -17,18 +12,54 @@ import java.util.ArrayList;
  * @author Anthony Coke
  * @author Francesco Monti
  */
-@AllArgsConstructor
 public class Prank {
-    @NonNull private Person chosenSender;
-    @NonNull private ArrayList<Person> chosenVictims;
-    @NonNull private ArrayList<Person> chosenCC;
-    @NonNull private final Mail mail;
-    @NonNull private final Group group;
+   @Getter
+   @Setter
+   private Person chosenSender;
 
-    // TODO : DELETE CES GETTERS ?
+   @Getter
+   @Setter
+   private String message;
 
-    public Mail getMail() {
-        return mail;
-    }
+   private Group chosenVictims;
+   private Group chosenCC;
+
+
+   public Prank(Person sender, Group victims, Group cc, String message) {
+      this.chosenSender = new Person(sender);
+      this.chosenVictims = new Group(victims);
+      this.chosenCC = new Group(cc);
+      this.message = message;
+   }
+
+   public Group getChosenCC() {
+      return new Group(chosenCC);
+   }
+
+   public void setChosenCC(Group chosenCC) {
+      this.chosenCC = new Group(chosenCC);
+   }
+
+   public Group getChosenVictims() {
+      return new Group(chosenVictims);
+   }
+
+   public void setChosenVictims(Group chosenVictims) {
+      this.chosenVictims = new Group(chosenVictims);
+   }
+
+   public Mail getMail() {
+      Mail m = new Mail(message);
+      for (Person p : chosenVictims) {
+         m.addTo(p);
+      }
+
+      for (Person p : chosenCC) {
+         m.addCc(p);
+      }
+
+      m.setFrom(chosenSender.getEmailAddress());
+
+      return m;
+   }
 }
-

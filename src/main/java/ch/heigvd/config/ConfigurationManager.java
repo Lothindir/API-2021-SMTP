@@ -1,5 +1,6 @@
 package ch.heigvd.config;
 
+import ch.heigvd.mail.Group;
 import ch.heigvd.mail.Person;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,9 +28,9 @@ public class ConfigurationManager {
     private String smtpServerAddress;
     private int smtpServerPort;
     private int nbOfGroups;
-    private ArrayList<Person> victims;
     private ArrayList<String> messages;
-    private ArrayList<Person> peopleToCc;
+    private Group victims;
+    private Group peopleToCc;
 
     /**
      * Default constructor.
@@ -67,8 +68,8 @@ public class ConfigurationManager {
      * Get the list of the people to prank.
      * @return a copy of the list to respect encapsulation.
      */
-    public ArrayList<Person> getVictims() {
-        return new ArrayList<>(victims);
+    public Group getVictims() {
+        return new Group(victims);
     }
 
     /**
@@ -83,8 +84,8 @@ public class ConfigurationManager {
      * Get the list of the people to add as carbon copy.
      * @return a copy of the list to respect encapsulation.
      */
-    public ArrayList<Person> getPeopleToCc() {
-        return new ArrayList<>(peopleToCc);
+    public Group getPeopleToCc() {
+        return new Group(peopleToCc);
     }
 
     /**
@@ -102,13 +103,13 @@ public class ConfigurationManager {
             this.nbOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
             if(nbOfGroups <= 0)
                 throw new RuntimeException("nbOfGroups cannot be equal or smaller that zero !");
-            this.peopleToCc = new ArrayList<>();
+            this.peopleToCc = new Group();
 
             // Retrieve each e-mail address seperated by a comma.
             String str = properties.getProperty("peopleToCC");
             String[] tab = str.split(",");
             for (String s : tab) {
-                this.peopleToCc.add(new Person(s));
+               this.peopleToCc.add(new Person(s));
             }
 
         } catch (IOException e) {
@@ -122,8 +123,8 @@ public class ConfigurationManager {
      * @param path the path of the file.
      * @return an ArrayList of Person.
      */
-    public ArrayList<Person> getVictimsFromFile(String path) {
-        ArrayList<Person> list = new ArrayList<>();
+    public Group getVictimsFromFile(String path) {
+        Group list = new Group();
         try (BufferedReader r = new BufferedReader(
                 new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
             String line;
