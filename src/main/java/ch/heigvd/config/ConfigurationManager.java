@@ -1,16 +1,18 @@
 package ch.heigvd.config;
 
-import ch.heigvd.mail.Group;
-import ch.heigvd.mail.Person;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import ch.heigvd.mail.Group;
+import ch.heigvd.mail.Person;
+import lombok.Getter;
 
 /**
  * Implementation of the configuration manager. Its main goal is to load
