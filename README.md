@@ -20,7 +20,10 @@
 
 The main goal of this project was to become familiar with the SMTP protocol. We were asked by our professor to develop a client application that plays pranks on a list of victims. This app will generate a number of pranks based on properties specified in a config file, a list of messages and a list of victims. Then, the app will communicate with a SMTP server in order to send the prank e-mails to the targeted victims.
 
-If you don't want to disturb a live SMTP server, you can use a test server like MockMock. It will act as a normal server, let you look at the requests you make but it won't dispatch the pranks to the real e-mail addresses.
+If you don't want to disturb a live SMTP server, you can use a test server 
+like MockMock. It will act as a normal server, let you look at the requests 
+you make, but it won't dispatch the pranks to the real e-mail addresses. So 
+you can do whatever you want, it will not affect anybody.
 
 | :warning: Disclaimer |
 |:---------------------|
@@ -132,16 +135,73 @@ We decided to create a ConfigurationManager class, its main goal is to fetch the
 
 In this package you will find a Group class representing a group of person affected by the prank attack.
 
-The Mail class stores all the information of the e-mail to send such as the sender's address, the subject, the body, the victims' address and the people to set as carbon copy. Every information is stored as a String.
+The Mail class stores all the information of the e-mail to send such as the 
+sender's address, the subject, the body, the victims' address and the people 
+to set as hidden carbon copy. Every information is stored as a String.
 
-Obviously it's a class representing a person. It stores the e-mail address fetched in the files.
+Person is obviously a class representing a person. It stores the e-mail 
+address fetched in the files.
 
 ## Prank
 
-Here we put the Prank class. It contains all the information regarding the prank attack (victims, group, mail, sender). It generates a mail object with all the information it has.
+Here we put the Prank class. It contains all the information regarding the prank attack (victims, group, sender). It generates a mail object with all the information it has.
 
 Then there is the PrankManager, it simply generates groups from the list of people and creates a custom prank for each one of them.
 
 ## Smtp
 
 The SMTP Client only task is to communicate with the SMTP server and execute the attack. It uses the SMTP protocol to send the information to the server and listens for its response.
+
+## Example of output 
+```shell
+INFO: Connected to Socket[addr=localhost/127.0.0.1,port=25,localport=42698]
+INFO: 220 06891e085e5a ESMTP MockMock SMTP Server version 1.4
+INFO: EHLO 250-06891e085e5a
+INFO: 250-8BITMIME
+INFO: 250 Ok
+INFO: 
+
+INFO: Sending mail...
+INFO: MAIL FROM: <boblito@twitter.fr> => 250 Ok
+INFO: RCPT TO: <leroi122@gmail.com> => 250 Ok
+INFO: RCPT TO: <judith@email.com> => 250 Ok
+INFO: RCPT TO: <alice@heig-vd.ch> => 250 Ok
+INFO: BCC TO: anthony.coke@heig-vd.ch => 250 Ok
+INFO: BCC TO: francesco.monti@heig-vd.ch => 250 Ok
+INFO: Writing DATA...
+INFO: 250 Ok
+
+INFO: Sending mail...
+INFO: MAIL FROM: <bob@heig-vd.ch> => 250 Ok
+INFO: RCPT TO: <antoine@yahoo.fr> => 250 Ok
+INFO: RCPT TO: <robert@pom.dapi> => 250 Ok
+INFO: BCC TO: anthony.coke@heig-vd.ch => 250 Ok
+INFO: BCC TO: francesco.monti@heig-vd.ch => 250 Ok
+INFO: Writing DATA...
+INFO: 250 Ok
+
+INFO: Sending mail...
+INFO: MAIL FROM: <bob@gmail.com> => 250 Ok
+INFO: RCPT TO: <bazar.pazivessitch@heig-vd.ch> => 250 Ok
+INFO: RCPT TO: <jo.fricoli@heig-vd.ch> => 250 Ok
+INFO: RCPT TO: <val.calin@heig-vd.ch> => 250 Ok
+INFO: RCPT TO: <gui.mo@heig-vd.ch> => 250 Ok
+INFO: BCC TO: anthony.coke@heig-vd.ch => 250 Ok
+INFO: BCC TO: francesco.monti@heig-vd.ch => 250 Ok
+INFO: Writing DATA...
+INFO: 250 Ok
+
+INFO: Sending mail...
+INFO: MAIL FROM: <iamAHacker@com.com> => 250 Ok
+INFO: RCPT TO: <jean.eustache@google.com> => 250 Ok
+INFO: RCPT TO: <ma.gol@heig-vd.ch> => 250 Ok
+INFO: RCPT TO: <john.doe@generic.com> => 250 Ok
+INFO: RCPT TO: <alex.terieur@heig-vd.ch> => 250 Ok
+INFO: BCC TO: anthony.coke@heig-vd.ch => 250 Ok
+INFO: BCC TO: francesco.monti@heig-vd.ch => 250 Ok
+INFO: Writing DATA...
+INFO: 250 Ok
+
+INFO: Quitting...
+
+```
