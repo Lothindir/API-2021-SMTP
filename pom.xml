@@ -36,6 +36,9 @@
                                         <include>messages.utf8</include>
                                         <include>victims.utf8</include>
                                     </includes>
+                                    <excludes>
+                                       <exclude>mailtrap.properties</exclude>
+                                    </excludes>
                                 </resource>
                             </resources>
                         </configuration>
