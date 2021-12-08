@@ -25,12 +25,12 @@ public class Prank {
    private Group cc;
 
    /**
-    * Constructs a Prank with the given sender, victims, cc and message
+    * Constructs a Prank with the given sender, victims, cc and message.
     * 
-    * @param sender  the mail sender
-    * @param victims the list of victims
-    * @param cc      the list of people to cc
-    * @param message the message to send
+    * @param sender  the mail sender.
+    * @param victims the list of victims.
+    * @param cc      the list of people to cc.
+    * @param message the message to send.
     */
    public Prank(Person sender, Group victims, Group cc, String message) {
       this.sender = new Person(sender);
@@ -40,32 +40,32 @@ public class Prank {
    }
 
    /**
-    * Gets the list of cc
-    * @return the list of people to cc
+    * Gets the list of cc.
+    * @return the list of people to cc.
     */
    public Group getCc() {
       return new Group(cc);
    }
 
    /**
-    * Sets the chosen cc list
-    * @param cc the list of people to cc
+    * Sets the chosen cc list.
+    * @param cc the list of people to cc.
     */
    public void setCc(Group cc) {
       this.cc = new Group(cc);
    }
 
    /**
-    * Gets the list of victims
-    * @return the list of victims
+    * Gets the list of victims.
+    * @return the list of victims.
     */
    public Group getVictims() {
       return new Group(victims);
    }
 
    /**
-    * Sets the list of victims
-    * @param victims
+    * Sets the list of victims.
+    * @param victims a group of victims.
     */
    public void setVictims(Group victims) {
       this.victims = new Group(victims);
@@ -73,7 +73,7 @@ public class Prank {
 
    /**
     * Generates a mail to send with the stored sender, victims, cc and message.
-    * @return the mail to send
+    * @return the mail to send.
     */
    public Mail getMail() {
       Mail m = new Mail(message);
