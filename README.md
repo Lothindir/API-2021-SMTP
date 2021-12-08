@@ -87,8 +87,7 @@ container running *mockmock* image and run it in detached mode.
 # Set up
 
 Now that you have a MockMock server running in the background you start by
-configuring your app. This SMTP application contains three files : _
-config.properties, messages.utf8, victims.utf8_.
+configuring your app. This SMTP application contains three files : _config.properties, messages.utf8, victims.utf8_.
 
 ## _config.properties_
 

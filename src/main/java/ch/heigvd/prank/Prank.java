@@ -58,15 +58,24 @@ public class Prank {
    }
 
    /**
+<<<<<<< HEAD
+    * Gets the list of victims.
+    * @return the list of victims.
+=======
     * Gets the list of victims
     * 
     * @return the list of victims
+>>>>>>> cb458804a36213adfc9e4979b5c38cee533c690f
     */
    public Group getVictims() {
       return new Group(victims);
    }
 
    /**
+<<<<<<< HEAD
+    * Sets the list of victims.
+    * @param victims a group of victims.
+=======
     * Sets the list of victims
     * 
     * @param victims the list of victims
@@ -79,6 +88,7 @@ public class Prank {
     * Generates a mail to send with the stored sender, victims, blind carbon copy list and message.
     * 
     * @return the mail to send
+>>>>>>> cb458804a36213adfc9e4979b5c38cee533c690f
     */
    public Mail getMail() {
       Mail m = new Mail(message);
