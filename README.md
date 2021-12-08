@@ -78,14 +78,14 @@ In this file you will find the following properties :
 smtpServerAddress=127.0.0.1
 smtpServerPort=25
 numberOfGroups=1
-personToBCC=bob.dylan@rock.ch,michael.jackson@thriller.com
+peopleToBCC=bob.dylan@rock.ch,michael.jackson@thriller.com
 smtpUser=123username123
 smtpPassword=abcpassabc
 ```
 
 * `smtpServerAddress` should point to the targeted server address without the port
 * `numberOfGroups` should not be greater than the number of victims divided by 3. The reason is that each group is composed by a sender and minimum two victims
-* `personToBCC` is a list of people that will receive each prank mail sent by the program
+* `peopleToBCC` is a list of people that will receive each prank mail sent by the program
 * `smtpUser` is the username required if using plain authentication _(optional)_
 * `smtpPassword` is the password required if using plain authentication _(optional)_
 
