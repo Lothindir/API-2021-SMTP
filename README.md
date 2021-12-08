@@ -101,7 +101,7 @@ If the SMTP server is up and running and the properties are correct everything s
 
 ## Class diagram
 
-![]()
+![class diagram](figures/uml_diagram_smtp.png)
 
 We decided to divide our project in four packages : config, mail, prank, 
 smtp. 
@@ -110,7 +110,6 @@ client with some properties from a configuration manager. Generates a list
 of pranks using the PrankManager and sends each custom Mail to the client.
 
 ## Config
-
 This package contains the different configuration files such as config.
 properties, messages.utf8 and victims.utf8. We decided to create a 
 ConfigurationManager class, its main goal is to fetch the configuration from 
