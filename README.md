@@ -106,7 +106,7 @@ Clone this repo and be sure to have java (jdk-11) and maven installed. Go to the
 The app provides a way to specify where the configuration files are located. The only restriction is that they all have to be in the same folder. To specify the path to the configuration files just type
 
 ```
-> mvn exec:java -Dargs="<path/to/conf/folder>"
+> mvn exec:java -Dexec.args="<path/to/conf/folder>"
 or
 > java -jar Spamibot-1.0.jar <path/to/conf/folder>
 ```
