@@ -15,49 +15,77 @@ import lombok.Setter;
 public class Prank {
    @Getter
    @Setter
-   private Person chosenSender;
+   private Person sender;
 
    @Getter
    @Setter
    private String message;
 
-   private Group chosenVictims;
-   private Group chosenCC;
+   private Group victims;
+   private Group cc;
 
+   /**
+    * Constructs a Prank with the given sender, victims, cc and message
+    * 
+    * @param sender  the mail sender
+    * @param victims the list of victims
+    * @param cc      the list of people to cc
+    * @param message the message to send
+    */
    public Prank(Person sender, Group victims, Group cc, String message) {
-      this.chosenSender = new Person(sender);
-      this.chosenVictims = new Group(victims);
-      this.chosenCC = new Group(cc);
+      this.sender = new Person(sender);
+      this.victims = new Group(victims);
+      this.cc = new Group(cc);
       this.message = message;
    }
 
-   public Group getChosenCC() {
-      return new Group(chosenCC);
+   /**
+    * Gets the list of cc
+    * @return the list of people to cc
+    */
+   public Group getCc() {
+      return new Group(cc);
    }
 
-   public void setChosenCC(Group chosenCC) {
-      this.chosenCC = new Group(chosenCC);
+   /**
+    * Sets the chosen cc list
+    * @param cc the list of people to cc
+    */
+   public void setCc(Group cc) {
+      this.cc = new Group(cc);
    }
 
-   public Group getChosenVictims() {
-      return new Group(chosenVictims);
+   /**
+    * Gets the list of victims
+    * @return the list of victims
+    */
+   public Group getVictims() {
+      return new Group(victims);
    }
 
-   public void setChosenVictims(Group chosenVictims) {
-      this.chosenVictims = new Group(chosenVictims);
+   /**
+    * Sets the list of victims
+    * @param victims
+    */
+   public void setVictims(Group victims) {
+      this.victims = new Group(victims);
    }
 
+   /**
+    * Generates a mail to send with the stored sender, victims, cc and message.
+    * @return the mail to send
+    */
    public Mail getMail() {
       Mail m = new Mail(message);
-      for (Person p : chosenVictims) {
+      for (Person p : victims) {
          m.addTo(p);
       }
 
-      for (Person p : chosenCC) {
+      for (Person p : cc) {
          m.addCc(p);
       }
 
-      m.setFrom(chosenSender.getEmailAddress());
+      m.setFrom(sender.getEmailAddress());
 
       return m;
    }
