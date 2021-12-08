@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import ch.heigvd.mail.Group;
 import ch.heigvd.mail.Person;
@@ -24,6 +25,7 @@ import lombok.Getter;
 @Getter
 public class ConfigurationManager {
    private final static Logger LOG = Logger.getLogger(ConfigurationManager.class.getName());
+   private final static Pattern EMAIL_REGEX = Pattern.compile("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
 
    /**
     * Attributes.
@@ -35,7 +37,7 @@ public class ConfigurationManager {
    private int nbOfGroups;
    private final List<String> messages;
    private final Group victims;
-   private Group peopleToCc;
+   private Group peopleToBcc;
 
    /**
     * Default constructor.
@@ -89,12 +91,12 @@ public class ConfigurationManager {
    }
 
    /**
-    * Get the list of the people to add as carbon copy.
+    * Get the list of the people to add as blind carbon copy.
     * 
     * @return a copy of the list to respect encapsulation.
     */
-   public Group getPeopleToCc() {
-      return new Group(peopleToCc);
+   public Group getPeopleToBcc() {
+      return new Group(peopleToBcc);
    }
 
    /**
@@ -113,13 +115,16 @@ public class ConfigurationManager {
          this.nbOfGroups = Integer.parseInt(properties.getProperty("numberOfGroups"));
          if (nbOfGroups <= 0)
             throw new RuntimeException("nbOfGroups cannot be equal or smaller that zero !");
-         this.peopleToCc = new Group();
+         this.peopleToBcc = new Group();
 
          // Retrieve each e-mail address seperated by a comma.
          String str = properties.getProperty("peopleToCC");
          String[] tab = str.split(",");
          for (String s : tab) {
-            this.peopleToCc.add(new Person(s));
+            if(EMAIL_REGEX.matcher(s).matches())
+               this.peopleToBcc.add(new Person(s));
+            else
+               LOG.warning("The victim email " + s + " is not valid");
          }
 
          this.smtpUser = properties.getProperty("smtpUser", "");
@@ -145,7 +150,10 @@ public class ConfigurationManager {
          String line;
 
          while ((line = r.readLine()) != null) {
-            list.add(new Person(line));
+            if(EMAIL_REGEX.matcher(line).matches())
+               list.add(new Person(line));
+            else
+               LOG.warning("The email " + line + " is not valid");
          }
 
       } catch (IOException e) {

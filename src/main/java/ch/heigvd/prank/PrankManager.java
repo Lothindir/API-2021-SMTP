@@ -32,14 +32,14 @@ public class PrankManager {
    }
 
    /**
-    * Generate an ArrayList of pranks.
+    * Generate an list of pranks.
     * 
-    * @return a List of {@link Prank} (can contain only one).
+    * @return a list of {@link Prank} (can contain only one).
     */
    public List<Prank> generatePranks() {
       List<Prank> pranks = new ArrayList<>();
       List<String> messages = confMan.getMessages();
-      Group cc = confMan.getPeopleToCc();
+      Group bcc = confMan.getPeopleToBcc();
       List<Group> groups = generateGroups(confMan.getVictims(), nbOfGroups);
 
       int index = 0;
@@ -51,7 +51,7 @@ public class PrankManager {
          Person sender = g.remove(g.size() - 1); // Remove last to avoid shifting all the list
 
          // generate the prank and add it to the pranks list
-         Prank prank = new Prank(sender, g, cc, messages.get(index));
+         Prank prank = new Prank(sender, g, bcc, messages.get(index));
          index = (++index) % messages.size();
 
          pranks.add(prank);

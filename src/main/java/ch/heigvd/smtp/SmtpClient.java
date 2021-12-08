@@ -184,16 +184,16 @@ public class SmtpClient implements AutoCloseable {
          LOG.info(writeline + " => " + readline);
       }
 
-      // define recipients in carbon copy
-      for (String receptCC : mail.getCc()) {
+      // define recipients in blind carbon copy
+      for (String receptCC : mail.getBcc()) {
          bw.write("RCPT TO: <" + receptCC + ">" + lineReturn);
          bw.flush();
          readline = br.readLine();
          if (!readline.startsWith(OK_CODE)) {
-            LOG.severe("CC TO: " + receptCC + " => " + readline);
+            LOG.severe("BCC TO: " + receptCC + " => " + readline);
             throw new IOException("Error occurred: " + readline);
          }
-         LOG.info("CC TO: " + receptCC + " => " + readline);
+         LOG.info("BCC TO: " + receptCC + " => " + readline);
       }
 
       // write message with encoding
@@ -216,19 +216,6 @@ public class SmtpClient implements AutoCloseable {
          }
       }
       bw.write(lineReturn);
-
-      // list carbon copy people
-      bw.write("Cc: ");
-      int mailGetCcSize = mail.getCc().size();
-      for (int i = 0; i < mailGetCcSize; ++i) {
-         if (i == mailGetCcSize - 1) {
-            bw.write(mail.getCc().get(i));
-         } else {
-            bw.write(mail.getCc().get(i) + ",");
-         }
-      }
-      bw.write(lineReturn);
-      bw.flush();
 
       // add subject(b64 encoded for utf-8 header) and body, confirm e-mail
       bw.write("Subject: =?utf-8?B?" + encodeBase64(mail.getSubject()) + "?=" + lineReturn + lineReturn);

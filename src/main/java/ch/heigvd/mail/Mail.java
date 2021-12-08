@@ -17,7 +17,7 @@ public class Mail {
    @Setter
    private String from;
    private final List<String> to;
-   private final List<String> cc;
+   private final List<String> bcc;
    private String subject;
    private String body;
 
@@ -29,7 +29,7 @@ public class Mail {
    public Mail(String message) {
       parseMessage(message);
       to = new ArrayList<>();
-      cc = new ArrayList<>();
+      bcc = new ArrayList<>();
    }
 
    /**
@@ -58,11 +58,11 @@ public class Mail {
    }
 
    /**
-    * Gets the list of the e-mail address in the carbon copy list.
-    * @return the list of carbon copy.
+    * Gets the list of the e-mail address in the blind carbon copy list.
+    * @return the list of blind carbon copy.
     */
-   public List<String> getCc() {
-      return new ArrayList<>(cc);
+   public List<String> getBcc() {
+      return new ArrayList<>(bcc);
    }
 
    /**
@@ -74,10 +74,10 @@ public class Mail {
    }
 
    /**
-    * Add a person's e-mail address to the carbon copy list.
+    * Add a person's e-mail address to the blind carbon copy list.
     * @param p the person to add.
     */
-   public void addCc(Person p) {
-      cc.add(p.getEmailAddress());
+   public void addBcc(Person p) {
+      bcc.add(p.getEmailAddress());
    }
 }

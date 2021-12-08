@@ -22,39 +22,39 @@ public class Prank {
    private String message;
 
    private Group victims;
-   private Group cc;
+   private Group bcc;
 
    /**
-    * Constructs a Prank with the given sender, victims, cc and message
+    * Constructs a Prank with the given sender, victims, blind carbon copy list and message
     * 
     * @param sender  the mail sender
     * @param victims the list of victims
-    * @param cc      the list of people to cc
+    * @param bcc      the blind carbon copy list
     * @param message the message to send
     */
-   public Prank(Person sender, Group victims, Group cc, String message) {
+   public Prank(Person sender, Group victims, Group bcc, String message) {
       this.sender = new Person(sender);
       this.victims = new Group(victims);
-      this.cc = new Group(cc);
+      this.bcc = new Group(bcc);
       this.message = message;
    }
 
    /**
-    * Gets the list of cc
+    * Gets the blind carbon copy list
     * 
-    * @return the list of people to cc
+    * @return the blind carbon copy list
     */
-   public Group getCc() {
-      return new Group(cc);
+   public Group getBcc() {
+      return new Group(bcc);
    }
 
    /**
-    * Sets the chosen cc list
+    * Sets the chosen blind carbon copy list
     * 
-    * @param cc the list of people to cc
+    * @param bcc the blind carbon copy list
     */
-   public void setCc(Group cc) {
-      this.cc = new Group(cc);
+   public void setBcc(Group bcc) {
+      this.bcc = new Group(bcc);
    }
 
    /**
@@ -69,14 +69,14 @@ public class Prank {
    /**
     * Sets the list of victims
     * 
-    * @param victims
+    * @param victims the list of victims
     */
    public void setVictims(Group victims) {
       this.victims = new Group(victims);
    }
 
    /**
-    * Generates a mail to send with the stored sender, victims, cc and message.
+    * Generates a mail to send with the stored sender, victims, blind carbon copy list and message.
     * 
     * @return the mail to send
     */
@@ -86,8 +86,8 @@ public class Prank {
          m.addTo(p);
       }
 
-      for (Person p : cc) {
-         m.addCc(p);
+      for (Person p : bcc) {
+         m.addBcc(p);
       }
 
       m.setFrom(sender.getEmailAddress());
