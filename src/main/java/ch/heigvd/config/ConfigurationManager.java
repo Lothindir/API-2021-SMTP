@@ -26,7 +26,7 @@ public class ConfigurationManager {
    private final static Logger LOG = Logger.getLogger(ConfigurationManager.class.getName());
 
    /**
-    * Attributs
+    * Attributes.
     */
    private String smtpServerAddress;
    private int smtpServerPort;

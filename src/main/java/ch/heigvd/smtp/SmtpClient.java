@@ -38,28 +38,28 @@ public class SmtpClient implements AutoCloseable {
    private BufferedWriter bw;
 
    /**
-    * Constructor with parameters, generates an SmtpClient
+    * Constructor with parameters, generates an SmtpClient.
     * 
-    * @param smtpServerAddress the ip address of the server
-    * @param smtpServerPort    the port used to communicate with the server
-    * @throws UnknownHostException if the smtp server host is unknown
+    * @param smtpServerAddress the ip address of the server.
+    * @param smtpServerPort    the port used to communicate with the server.
+    * @throws UnknownHostException if the smtp server host is unknown.
     * @throws IOException          if an I/O error occurs when connecting to the
-    *                              server
+    *                              server.
     */
    public SmtpClient(String smtpServerAddress, int smtpServerPort) throws UnknownHostException, IOException {
       this(smtpServerAddress, smtpServerPort, "", "");
    }
 
    /**
-    * Constructor with parameters, generates an SmtpClient with auth
+    * Constructor with parameters, generates an SmtpClient with auth.
     * 
-    * @param smtpServerAddress the ip address of the server
-    * @param smtpServerPort    the port used to communicate with the server
-    * @param smtpUser          the user for the smtp auth
-    * @param smtpPassword      the plain password for the smtp auth
-    * @throws UnknownHostException if the smtp server host is unknown
+    * @param smtpServerAddress the ip address of the server.
+    * @param smtpServerPort    the port used to communicate with the server.
+    * @param smtpUser          the user for the smtp auth.
+    * @param smtpPassword      the plain password for the smtp auth.
+    * @throws UnknownHostException if the smtp server host is unknown.
     * @throws IOException          if an I/O error occurs when connecting to the
-    *                              server
+    *                              server.
     */
    public SmtpClient(String smtpServerAddress, int smtpServerPort, String smtpUser, String smtpPassword)
          throws UnknownHostException, IOException {
@@ -72,11 +72,11 @@ public class SmtpClient implements AutoCloseable {
    }
 
    /**
-    * Connects to the SMTP server and initialises all associated resources
+    * Connects to the SMTP server and initialises all associated resources.
     * 
-    * @throws UnknownHostException if the smtp server host is unknown
+    * @throws UnknownHostException if the smtp server host is unknown.
     * @throws IOException          if an I/O error occurs when connecting to the
-    *                              server
+    *                              server.
     */
    public void connect() throws UnknownHostException, IOException {
       clientSocket = new Socket(smtpServerAddress, smtpServerPort);
@@ -143,7 +143,7 @@ public class SmtpClient implements AutoCloseable {
     * Sends an e-mail. Connects to the server and talks with it using the SMTP
     * protocol.
     * 
-    * @param mail the e-mail to send
+    * @param mail the e-mail to send.
     */
    public void sendMail(Mail mail) throws IOException {
       int retries = 0;
@@ -245,7 +245,7 @@ public class SmtpClient implements AutoCloseable {
    }
 
    /**
-    * Closes the client and all associated resources
+    * Closes the client and all associated resources.
     */
    public void close() {
       try {
@@ -271,10 +271,10 @@ public class SmtpClient implements AutoCloseable {
    }
 
    /**
-    * Encode a string in Base64
+    * Encode a string in Base64.
     * 
-    * @param str the string to be encoded
-    * @return the base64 encoded string
+    * @param str the string to be encoded.
+    * @return the base64 encoded string.
     */
    private String encodeBase64(String str) {
       return Base64.getEncoder().encodeToString(str.getBytes(StandardCharsets.UTF_8));

@@ -35,7 +35,7 @@ public class Mail {
    /**
     * Retrieves the subject and the body of the message to be sent.
     * 
-    * @param message
+    * @param message the message to parse.
     */
    private void parseMessage(String message) {
       String[] strs = message.split("\n");
@@ -49,18 +49,34 @@ public class Mail {
       body = sb.toString();
    }
 
+   /**
+    * Gets the list of the e-mail address in the recipient list.
+    * @return the list of carbon copy.
+    */
    public List<String> getTo() {
       return new ArrayList<>(to);
    }
 
+   /**
+    * Gets the list of the e-mail address in the carbon copy list.
+    * @return the list of carbon copy.
+    */
    public List<String> getCc() {
       return new ArrayList<>(cc);
    }
 
+   /**
+    * Add a person's email address to the recipient list.
+    * @param p the person to add.
+    */
    public void addTo(Person p) {
       to.add(p.getEmailAddress());
    }
 
+   /**
+    * Add a person's e-mail address to the carbon copy list.
+    * @param p the person to add.
+    */
    public void addCc(Person p) {
       cc.add(p.getEmailAddress());
    }

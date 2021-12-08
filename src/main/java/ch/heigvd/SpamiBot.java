@@ -20,7 +20,7 @@ public class SpamiBot {
    /**
     * Does the prank ...
     * 
-    * @param args args[0] is the path where the config files are located
+    * @param args args[0] is the path where the config files are located.
     */
    public static void main(String... args) {
       System.setProperty("java.util.logging.SimpleFormatter.format", "%4$s: %5$s%6$s%n");

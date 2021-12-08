@@ -16,9 +16,9 @@ public class Person {
    private final String emailAddress;
 
    /**
-    * Copy constructor
+    * Copy constructor.
     * 
-    * @param other other person to copy from
+    * @param other other person to copy from.
     */
    public Person(Person other) {
       this.emailAddress = other.emailAddress;

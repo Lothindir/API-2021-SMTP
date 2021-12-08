@@ -32,9 +32,9 @@ public class PrankManager {
    }
 
    /**
-    * Generate an ArrayList of pranks
+    * Generate an ArrayList of pranks.
     * 
-    * @return a List of {@link Prank} (can contain only one)
+    * @return a List of {@link Prank} (can contain only one).
     */
    public List<Prank> generatePranks() {
       List<Prank> pranks = new ArrayList<>();
@@ -65,7 +65,7 @@ public class PrankManager {
     * 
     * @param victims    the number of victims in the victims.utf8 file.
     * @param nbOfGroups the number of groups wished.
-    * @return an List of {@link Group}.
+    * @return a List of {@link Group}.
     */
    private List<Group> generateGroups(Group victims, int nbOfGroups) throws ArithmeticException {
       List<Group> groups = new ArrayList<>();
