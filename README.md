@@ -56,7 +56,8 @@ To stop the server just type:
 
 ### Docker Desktop
 
-Once the image is pulled from Docker hub or built locally you can create a new container using that image. On Docker Desktop it looks like this :
+Once the image is pulled from Docker hub or built locally you can create a new container using that image. On Docker Desktop it looks like this:
+
 ![docker_desktop](figures/docker_desktop_creation.png)
 
 ## Build image locally
