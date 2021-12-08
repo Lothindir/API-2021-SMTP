@@ -1,4 +1,4 @@
-# Table des matières
+# Table of contents
 
 - [Introduction](#introduction)
 - [MockMock server](#mockmock-server)
@@ -45,6 +45,7 @@ You can use the pre-build image of MockMock available on [Docker hub](https://hu
 # Run the container using the image
 > docker run -d -p 25:25 -p 8282:8282 --name mockmock lothindir/mockmock
 ```
+Linux users might need to use **sudo** for these commands to work.
 
 The web interface will be available at the address `localhost:8282` and the SMTP server will be available on port `25`.
 
@@ -64,7 +65,7 @@ Once the image is pulled from Docker hub or built locally you can create a new c
 
 First you need to open a terminal in the folder containing the provided DockerFile.
 
-Then, use `docker build -t mockmock .` to build an image named *mockmock*. This step might take a couple of minutes. Linux users might need to use **sudo** for this command to work.
+Then, use `docker build -t mockmock .` to build an image named *mockmock*. This step might take a couple of minutes. 
 
 Once it's done, use `docker run -d -p 25:25 -p 8282:8282 --name mockmock mockmock` to create a container running *mockmock* image and run it in detached mode.
 
@@ -95,7 +96,7 @@ Feel free to edit the properties to your likings.
 
 ## _messages.utf8_
 
-In this file you will find two templates of messages you could send. Each message starts with a subject line and ends with `----------------` (16 dashes). You can add as many messages as you like, the app will chose one randomly and assign it to a prank.
+In this file you will find two templates of messages you could send. Each message starts with a subject line and ends with `----------------` (16 dashes). You can add as many messages as you like, the app will chose one and assign it to a prank.
 
 ## _victims.utf8_
 
@@ -137,7 +138,7 @@ Obviously it's a class representing a person. It stores the e-mail address fetch
 
 ## Prank
 
-Here we put the Prank class. It contains all the information regarding the prank attack (victims, group, mail, sender). Its mail object will be transferred to the smtp client and sent to the victims.
+Here we put the Prank class. It contains all the information regarding the prank attack (victims, group, mail, sender). It generates a mail object with all the information it has.
 
 Then there is the PrankManager, it simply generates groups from the list of people and creates a custom prank for each one of them.
 
