@@ -25,7 +25,8 @@ import lombok.Getter;
 @Getter
 public class ConfigurationManager {
    private final static Logger LOG = Logger.getLogger(ConfigurationManager.class.getName());
-   private final static Pattern EMAIL_REGEX = Pattern.compile("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+   private final static Pattern EMAIL_REGEX = Pattern
+         .compile("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
 
    /**
     * Attributes.
@@ -50,8 +51,11 @@ public class ConfigurationManager {
     * Constructor with parameters, it loads the config from all the files.
     * 
     * @param path the path of the folder containing the config files.
+    * @throws RuntimeException if the path is not found, an email address is
+    *                          invalid or there are not enough people per group
+    *                          (min 3)
     */
-   public ConfigurationManager(String path) {
+   public ConfigurationManager(String path) throws RuntimeException {
       /** Thanks Windows ! */
       if (!path.isEmpty() && !(path.endsWith("/") || path.endsWith("\\"))) {
          if (System.getProperty("os.name").toLowerCase().contains("win"))
@@ -103,8 +107,10 @@ public class ConfigurationManager {
     * Loads the properties from the config.properties file.
     * 
     * @param path the path of the file.
+    * @throws RuntimeException if the path is not found or an email address is
+    *                          invalid
     */
-   public void loadProperties(String path) {
+   public void loadProperties(String path) throws RuntimeException {
       try {
          FileInputStream fis = new FileInputStream(path);
          Properties properties = new Properties();
@@ -117,14 +123,14 @@ public class ConfigurationManager {
             throw new RuntimeException("nbOfGroups cannot be equal or smaller that zero !");
          this.peopleToBcc = new Group();
 
-         // Retrieve each e-mail address seperated by a comma.
-         String str = properties.getProperty("peopleToCC");
+         // Retrieve each e-mail address separated by a comma.
+         String str = properties.getProperty("peopleToBCC");
          String[] tab = str.split(",");
          for (String s : tab) {
-            if(EMAIL_REGEX.matcher(s).matches())
+            if (EMAIL_REGEX.matcher(s).matches())
                this.peopleToBcc.add(new Person(s));
             else
-               LOG.warning("The victim email " + s + " is not valid");
+               throw new RuntimeException("The bcc email " + s + " is not valid");
          }
 
          this.smtpUser = properties.getProperty("smtpUser", "");
@@ -142,18 +148,20 @@ public class ConfigurationManager {
     * 
     * @param path the path of the file.
     * @return an ArrayList of Person.
+    * @throws RuntimeException if the path is not found or an email address is
+    *                          invalid
     */
-   public Group getVictimsFromFile(String path) {
+   public Group getVictimsFromFile(String path) throws RuntimeException {
       Group list = new Group();
       try (BufferedReader r = new BufferedReader(
             new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8))) {
          String line;
 
          while ((line = r.readLine()) != null) {
-            if(EMAIL_REGEX.matcher(line).matches())
+            if (EMAIL_REGEX.matcher(line).matches())
                list.add(new Person(line));
             else
-               LOG.warning("The email " + line + " is not valid");
+               throw new RuntimeException("The victim email " + line + " is not valid");
          }
 
       } catch (IOException e) {
@@ -169,8 +177,10 @@ public class ConfigurationManager {
     * 
     * @param path the path of the file containing the messages.
     * @return an ArrayList of String.
+    * @throws RuntimeException if the path is not found or an email address is
+    *                          invalid
     */
-   public ArrayList<String> getMessagesFromFile(String path) {
+   public ArrayList<String> getMessagesFromFile(String path) throws RuntimeException {
       ArrayList<String> list = new ArrayList<>();
 
       // try with ressource

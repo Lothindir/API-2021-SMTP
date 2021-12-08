@@ -33,6 +33,8 @@ public class SpamiBot {
          else
             confman = new ConfigurationManager();
       } catch (RuntimeException e) {
+         LOG.severe(e.getMessage());
+         LOG.severe("Application halted!");
          return;
       }
 
@@ -47,7 +49,7 @@ public class SpamiBot {
             smtpClient.sendMail(p.getMail());
          }
       } catch (Exception e) {
-         LOG.severe("An error occurred while sending the mails\n"+e.getMessage());
+         LOG.severe("An error occurred while sending the mails\n" + e.getMessage());
       }
    }
 }
