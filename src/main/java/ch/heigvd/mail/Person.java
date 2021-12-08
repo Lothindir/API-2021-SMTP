@@ -2,7 +2,6 @@ package ch.heigvd.mail;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 /**
  * Implementation of a person. It just stores an e-mail address retrieved from
@@ -12,7 +11,6 @@ import lombok.Setter;
  * @author Francesco Monti
  */
 @Getter
-@Setter
 @RequiredArgsConstructor
 public class Person {
    private final String emailAddress;

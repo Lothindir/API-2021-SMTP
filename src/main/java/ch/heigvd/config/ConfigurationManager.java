@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -32,8 +33,8 @@ public class ConfigurationManager {
    private String smtpUser;
    private String smtpPassword;
    private int nbOfGroups;
-   private ArrayList<String> messages;
-   private Group victims;
+   private final List<String> messages;
+   private final Group victims;
    private Group peopleToCc;
 
    /**

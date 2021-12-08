@@ -15,9 +15,7 @@ import ch.heigvd.mail.Person;
  */
 public class PrankManager {
 
-   // REMOVE ?
    private final ConfigurationManager confMan;
-   // REDUNDANT ?
    private final int nbOfGroups;
    private final int nbOfVictims;
 

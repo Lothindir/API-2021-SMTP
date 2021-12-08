@@ -16,8 +16,8 @@ import lombok.Setter;
 public class Mail {
    @Setter
    private String from;
-   private List<String> to;
-   private List<String> cc;
+   private final List<String> to;
+   private final List<String> cc;
    private String subject;
    private String body;
 
