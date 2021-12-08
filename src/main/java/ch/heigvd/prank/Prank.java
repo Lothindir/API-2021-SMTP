@@ -41,6 +41,7 @@ public class Prank {
 
    /**
     * Gets the list of cc
+    * 
     * @return the list of people to cc
     */
    public Group getCc() {
@@ -49,6 +50,7 @@ public class Prank {
 
    /**
     * Sets the chosen cc list
+    * 
     * @param cc the list of people to cc
     */
    public void setCc(Group cc) {
@@ -57,6 +59,7 @@ public class Prank {
 
    /**
     * Gets the list of victims
+    * 
     * @return the list of victims
     */
    public Group getVictims() {
@@ -65,6 +68,7 @@ public class Prank {
 
    /**
     * Sets the list of victims
+    * 
     * @param victims
     */
    public void setVictims(Group victims) {
@@ -73,6 +77,7 @@ public class Prank {
 
    /**
     * Generates a mail to send with the stored sender, victims, cc and message.
+    * 
     * @return the mail to send
     */
    public Mail getMail() {
