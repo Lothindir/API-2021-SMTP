@@ -1,72 +1,78 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [1.0.0]
+## [1.0.0] - 2021-12-08
 
 ### Bug Fixes
 
-- Fixed incorrect image starting jar
 - Fix maven exec command with args
+- Fixed incorrect image starting jar
 
 ### Documentation
 
-- Updated README
+- Add missing comment in PrankManager.java
+- Add CHANGELOG
 - Add jar usage in README
+- Updated README
 
 ### Features
 
-- Added client boilerplate
-- Add generatePranks & generateGroups
-- Working smtp client
-- Added argument to specify resources path
-- Add readme.md
-- Added optional credentials in config.properties
-- Rewrote SmtpClient to implement AutoClosable
 - Add uml_diagram image and update class diagram
+- Rewrote SmtpClient to implement AutoClosable
+- Added optional credentials in config.properties
+- Add readme.md
+- Added argument to specify resources path
+- Working smtp client
+- Add generatePranks & generateGroups
+- Added client boilerplate
 
 ### Miscellaneous Tasks
 
-- Added MockMock Dockerfile
-- Switched to Linux Alpine to reduce image size
-- Formatted file
-- Updated config files
-- Removed config files from src directory
-- Formatted files
-- Removed unused import
-- Added TOC to README
-- Changed logs messages and removed tests
-- Add comments to Prank.java
-- Format comments to Prank.java
-- Reformat README
+- Add client.iml to gitignore
+- Remove client.iml from repo
 - Add mailtrap config to resources exclusion list
+- Reformat README
+- Format comments to Prank.java
+- Add comments to Prank.java
+- Changed logs messages and removed tests
+- Added TOC to README
+- Removed unused import
+- Formatted files
+- Removed config files from src directory
+- Updated config files
+- Formatted file
+- Switched to Linux Alpine to reduce image size
+- Added MockMock Dockerfile
 
 ### Refactor
 
-- New infrastructure
-- Moved ressources files to own directory
-- Change main method content
-- Change class content, add methods
-- Add parse method in constructor
-- Add comments
-- Add comments
-- Code & diagram
-- Update readme and new messages in message list
-- Update readme... again
-- Clean code
-- Add message with accents
-- Rewrote code to better use the Group class
-- Refactored and formatted Mail and Person
-- Organize imports
-- Update class diagram
-- Change few things in code
-- Move cardinalities
-- Change comments
-- Add class diagram
-- Fix an old sentence not correct anymore
-- Add missing dot
-- Change CC to BCC
-- Change diagram
+- Add docker desktop image
+- Add victims
 - Add email validation and error handling
+- Change diagram
+- Change CC to BCC
+- Add missing dot
+- Fix an old sentence not correct anymore
+- Add class diagram
+- Change comments
+- Move cardinalities
+- Change few things in code
+- Update class diagram
+- Organize imports
+- Refactored and formatted Mail and Person
+- Rewrote code to better use the Group class
+- Add message with accents
+- Clean code
+- Update readme... again
+- Update readme and new messages in message list
+- Code & diagram
+- Add comments
+- Add comments
+- Add parse method in constructor
+- Change class content, add methods
+- Change main method content
+- Moved ressources files to own directory
+- New infrastructure
 
 ### Core
 
