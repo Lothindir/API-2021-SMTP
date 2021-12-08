@@ -126,7 +126,8 @@ public class ConfigurationManager {
          this.smtpPassword = properties.getProperty("smtpPassword", "");
 
       } catch (IOException e) {
-         LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
+         LOG.severe("Cannot find file at: " + System.getProperty("user.dir") + "/" + path);
+         throw new RuntimeException(path + " not found");
       }
 
    }
@@ -148,7 +149,8 @@ public class ConfigurationManager {
          }
 
       } catch (IOException e) {
-         LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
+         LOG.severe("Cannot find file at: " + System.getProperty("user.dir") + "/" + path);
+         throw new RuntimeException(path + " not found");
       }
 
       return list;
@@ -178,7 +180,8 @@ public class ConfigurationManager {
             sb.append(line).append("\r\n");
          }
       } catch (IOException e) {
-         LOG.log(Level.SEVERE, "Cannot find file at: " + System.getProperty("user.dir") + "/" + path, e);
+         LOG.severe("Cannot find file at: " + System.getProperty("user.dir") + "/" + path);
+         throw new RuntimeException(path + " not found");
       }
 
       return list;

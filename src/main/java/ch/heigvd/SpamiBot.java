@@ -29,10 +29,14 @@ public class SpamiBot {
 
       // Fetches the config
       ConfigurationManager confman;
-      if (args.length == 1)
-         confman = new ConfigurationManager(args[0]);
-      else
-         confman = new ConfigurationManager();
+      try {
+         if (args.length == 1)
+            confman = new ConfigurationManager(args[0]);
+         else
+            confman = new ConfigurationManager();
+      } catch (RuntimeException e) {
+         return;
+      }
 
       // Generates the prank(s)
       PrankManager pman = new PrankManager(confman);
@@ -45,7 +49,7 @@ public class SpamiBot {
             smtpClient.sendMail(p.getMail());
          }
       } catch (Exception e) {
-         LOG.log(Level.SEVERE, "An error occurred while sending the mails", e);
+         LOG.severe("An error occurred while sending the mails\n"+e.getMessage());
       }
    }
 }

@@ -254,7 +254,7 @@ public class SmtpClient implements AutoCloseable {
          bw.flush();
          LOG.info("Quitting...");
       } catch (IOException e) {
-         LOG.log(Level.SEVERE, e.getMessage(), e);
+         LOG.severe(e.getMessage());
       } finally {
          try {
             if (br != null)
@@ -266,7 +266,7 @@ public class SmtpClient implements AutoCloseable {
             if (clientSocket != null && !clientSocket.isClosed())
                clientSocket.close();
          } catch (IOException e) {
-            LOG.log(Level.SEVERE, e.getMessage(), e);
+            LOG.severe(e.getMessage());
          }
       }
    }

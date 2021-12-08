@@ -35,17 +35,17 @@ The installation procedure for all the supported platforms can be found [here](h
 You can use the pre-build image of MockMock available on [Docker hub](https://hub.docker.com/repository/docker/lothindir/mockmock) and built from this repo:
 ```
 # Pull the image from docker hub
-$ docker pull lothindir/mockmock
+> docker pull lothindir/mockmock
 
 # Run the container using the image
-$ docker run -d -p 25:25 -p 8282:8282 --name mockmock lothindir/mockmock
+> docker run -d -p 25:25 -p 8282:8282 --name mockmock lothindir/mockmock
 ```
 
 The web interface will be available at the address `localhost:8282` and the SMTP server will be available on port `25`.
 
 To stop the server just type:
 ```
-$ docker kill mockmock
+> docker kill mockmock
 ```
 
 ### Docker Desktop
@@ -68,10 +68,14 @@ smtpServerAddress=127.0.0.1
 smtpServerPort=25
 numberOfGroups=1
 personToCC=bob.dylan@rock.ch,michael.jackson@thriller.com
+smtpUser=123username123
+smtpPassword=abcpassabc
 ```
 * `smtpServerAddress` should point to the targeted server address without the port
 * `numberOfGroups` should not be greater than the number of victims divided by 3. The reason is that each group is composed by a sender and minimum two victims
 * `personToCC` is a list of people that will receive each prank mail sent by the program
+* `smtpUser` is the username required if using plain authentication _(optional)_
+* `smtpPassword` is the password required if using plain authentication _(optional)_
 
 Feel free to edit the properties to your likings. 
 
@@ -80,6 +84,16 @@ In this file you will find two templates of messages you could send. Each messag
 
 ## _victims.utf8_
 This file contains the list of e-mail addresses. Be sure to have correctly formatted addresses otherwise the app won't work.
+
+# Usage
+Clone this repo and be sure to have java (jdk-11) and maven installed. Go to the project root folder and build the application using `mvn clean package`. Once the application is built you can find the jar file and the configurations files in the _target_ directory.
+
+The app provides a way to specify where the configuration files are located. The only restriction is that they all have to be in the same folder. To specify the path to the configuration files just type
+```
+> mvn exec:java -Dargs="<path/to/conf/folder>"
+or
+> java -jar Spamibot-1.0.jar <path/to/conf/folder>
+```
 
 # Implementation
 
@@ -93,14 +107,14 @@ The SpamiBot class is the entry point of the application. It creates an SMTP
 client with some properties from a configuration manager. Generates a list 
 of pranks using the PrankManager and sends each custom Mail to the client.
 
-### Config
+## Config
 
 This package contains the different configuration files such as config.
 properties, messages.utf8 and victims.utf8. We decided to create a 
 ConfigurationManager class, its main goal is to fetch the configuration from 
 the files.
 
-### Mail
+## Mail
 In this package you will find a Group class representing a group of person 
 affected by the prank attack. 
 
@@ -111,7 +125,7 @@ to set as carbon copy. Every information is stored as a String.
 Obviously it's a class representing a person. It stores the e-mail address 
 fetched in the files.
 
-### Prank
+## Prank
 Here we put the Prank class. It contains all the information regarding the 
 prank attack (victims, group, mail, sender). 
 Its mail object will be 
