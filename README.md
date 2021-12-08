@@ -80,7 +80,7 @@ smtpPassword=abcpassabc
 Feel free to edit the properties to your likings. 
 
 ## _messages.utf8_
-In this file you will find two templates of messages you could send. Each message starts with a subject line and ends with `----------------`. You can add as many messages as you like, the app will chose one randomly and assign it to a prank.
+In this file you will find two templates of messages you could send. Each message starts with a subject line and ends with `----------------` (16 dashes). You can add as many messages as you like, the app will chose one randomly and assign it to a prank.
 
 ## _victims.utf8_
 This file contains the list of e-mail addresses. Be sure to have correctly formatted addresses otherwise the app won't work.
@@ -94,6 +94,8 @@ The app provides a way to specify where the configuration files are located. The
 or
 > java -jar Spamibot-1.0.jar <path/to/conf/folder>
 ```
+
+If the SMTP server is up and running and the properties are correct everything should work just fine. Enjoy sending prank mails !
 
 # Implementation
 
