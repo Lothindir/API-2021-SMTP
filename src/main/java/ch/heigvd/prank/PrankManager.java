@@ -66,6 +66,7 @@ public class PrankManager {
     * @param victims    the number of victims in the victims.utf8 file.
     * @param nbOfGroups the number of groups wished.
     * @return a List of {@link Group}.
+    * @throws ArithmeticException if number of groups is equal to zero
     */
    private List<Group> generateGroups(Group victims, int nbOfGroups) throws ArithmeticException {
       List<Group> groups = new ArrayList<>();
