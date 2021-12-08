@@ -1,14 +1,12 @@
 package ch.heigvd;
 
+import java.util.List;
+import java.util.logging.Logger;
+
 import ch.heigvd.config.ConfigurationManager;
 import ch.heigvd.prank.Prank;
 import ch.heigvd.prank.PrankManager;
 import ch.heigvd.smtp.SmtpClient;
-import lombok.extern.java.Log;
-
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Implementation of a SpamiBot. It will run the prank campaign.
